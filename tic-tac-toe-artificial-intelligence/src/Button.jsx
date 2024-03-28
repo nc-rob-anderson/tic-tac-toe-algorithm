@@ -1,27 +1,26 @@
 import checkWinner from "../utils/checkWinner"
+import checkDraw from "../utils/checkDraw"
+import cpuMove from "../utils/cpuMove"
 
-const Button = ({square, index, grid, setGrid, setIsCrossesTurn, isCrossesTurn, hasWon, setHasWon})=>{
+const Button = ({square, index, grid, setGrid, setIsCrossesTurn, isCrossesTurn, hasWon, setHasWon , hasDrawn, setHasDrawn})=>{
     const handleClick = () => {
-    if(!hasWon && !(typeof square === 'string' || square instanceof String)){
-        console.log("hey?")
+    if(!hasWon && !hasDrawn && !(typeof square === 'string' || square instanceof String)){
             setGrid((oldGrid)=>{
-                oldGrid[index] = isCrossesTurn ? "0" : "X"
+                oldGrid[index] = "0"
                 if (checkWinner(oldGrid, "X")){
                     setHasWon("X")
                 }
                 if (checkWinner(oldGrid, "0")){
                     setHasWon("0")
-                } 
+                } else if (checkDraw(grid)){
+                    setHasDrawn(true)
+                }
+                  else {
+                    cpuMove(oldGrid, isCrossesTurn, setHasWon)
+                }
                 return oldGrid
             })
-            setIsCrossesTurn((isCrossesTurn)=> !isCrossesTurn)
-            console.log(grid, "before checkWinner")
-        if (checkWinner(grid, "X")){
-            console.log("X won")
-        }
-        if (checkWinner(grid, "0")){
-            console.log("0 won")
-        } 
+            setIsCrossesTurn((isCrossesTurn) => !isCrossesTurn)
     }
     }
     return (<button onClick={handleClick}>{square}</button>)
