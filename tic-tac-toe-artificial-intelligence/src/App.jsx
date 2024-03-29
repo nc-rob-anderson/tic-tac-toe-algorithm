@@ -4,6 +4,7 @@ import Button from "./Button.jsx"
 import WinnerMsg from './WinnerMsg.jsx'
 import SelectOrder from './SelectOrder.jsx'
 import SelectPiece from './SelectPiece.jsx'
+import ResetButton from './ResetButton.jsx'
 
 function App() {
   const [grid, setGrid] = useState(new Array(9).fill(null))
@@ -37,6 +38,7 @@ function App() {
   </tbody>
 </table>
 <WinnerMsg {...{hasWon, hasDrawn}}/>
+<ResetButton {...{setGrid, hasDrawn, setHasDrawn, hasWon, setHasWon, setIsGameInPlay, setIsCpuTurn, setIsCrossesTurn}}/>
     </>
   )
 }
