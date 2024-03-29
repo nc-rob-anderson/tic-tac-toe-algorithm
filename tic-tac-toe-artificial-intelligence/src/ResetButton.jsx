@@ -9,7 +9,7 @@ const ResetButton = ({setGrid, hasDrawn, setHasDrawn, hasWon, setHasWon, setIsGa
         setIsCpuTurn(false)
         setIsCrossesTurn(false)
     }
-    return hasDrawn || hasWon? <button onClick={handleClick} className="select-button"><img src={refresh} className="svg-icon"/></button> : null
+    return hasDrawn || hasWon? <button onClick={handleClick} className="select-button"><img src={refresh} className="svg-icon"/></button> : <button onClick={handleClick} className="select-button" style={{visibility: "hidden"}}><img src={refresh} className="svg-icon"/></button>
 }
 
 export default ResetButton
