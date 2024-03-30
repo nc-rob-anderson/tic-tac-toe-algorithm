@@ -20,9 +20,10 @@ const findMoves = (grid, isCrossesTurn) => {
       futureGrid[index] = isCrossesTurn ? "0" : "X";
       let value = 0;
       if (checkWinner(futureGrid, "X")) value = Infinity;
-      if (userHasGoneInACorner(grid, isCrossesTurn) && index === 4) value++;
-      if (checkUserHasALosingPattern(index, grid, isCrossesTurn)) {
-        value += 2;
+      if (userHasGoneInACorner(grid, isCrossesTurn) && index === 4) value += 2;
+      else if (checkUserHasALosingPattern(index, grid, isCrossesTurn)) {
+        console.log("wer are in");
+        value++;
       }
       futureGrid[index] = isCrossesTurn ? "X" : "0";
       if (checkWinner(futureGrid, isCrossesTurn ? "X" : "0")) value = 5;
@@ -39,7 +40,10 @@ const sortMoves = (moves) => {
 
 const userHasGoneInACorner = (grid, isCrossesTurn) => {
   const corners = [grid[0], grid[2], grid[6], grid[8]];
-  return corners.some((corner) => corner === (isCrossesTurn ? "X" : "0"));
+  return (
+    corners.some((corner) => corner === (isCrossesTurn ? "X" : "0")) &&
+    !corners.some((corner) => corner === (isCrossesTurn ? "0" : "X"))
+  );
 };
 
 export default cpuMove;
